@@ -12,3 +12,5 @@ mara <- read.csv("D:/Drake Spring 2021/Drake STAT172/Final_Project/MarathonData.
 summary(mara)
 
 unique(mara$Wall21)
+
+# test for git push
