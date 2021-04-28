@@ -8,7 +8,7 @@ library(pROC)
 library(RColorBrewer)
 
 # read in customer churn data
-mara <- read.csv("D:/Drake Spring 2021/Drake STAT172/Final_Project/MarathonData.csv", stringsAsFactors = TRUE)
+mara <- read.csv(choose.files(), header = T, stringsAsFactors = TRUE)
 summary(mara)
 
 unique(mara$Wall21)
