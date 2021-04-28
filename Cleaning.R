@@ -9,11 +9,16 @@ library(RColorBrewer)
 
 # read in customer churn data
 mara <- read.csv(choose.files(), header = T, stringsAsFactors = TRUE)
+# for Mac
+mara <- read.csv(file.choose(), header = T, stringsAsFactors = TRUE)
+View(mara)
 summary(mara)
 
 unique(mara$Wall21)
 
-# test for git push
-# test change for sam
-
-#hello this is a test
+#
+mara$speed <- mara$CATEGORY
+mara$speed[mara$CATEGORY == "A"] <- "Fast"
+mara$speed[mara$CATEGORY == "B"] <- "Fast"
+mara$speed[mara$CATEGORY == "C"] <- "Slow"
+mara$speed[mara$CATEGORY == "D"] <- "Slow"
