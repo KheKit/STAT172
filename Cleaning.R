@@ -12,8 +12,7 @@ mara <- read.csv(file.choose(), header = T, stringsAsFactors = TRUE)
 View(mara)
 summary(mara)
 
-unique(mara$Wall21)
-
+# Creating our response variable
 mara$speed <- ifelse(mara$CATEGORY == "A" | mara$CATEGORY == "B", "Fast", "Slow")
 
-
+unique(mara$Category)
