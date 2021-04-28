@@ -14,3 +14,5 @@ summary(mara)
 unique(mara$Wall21)
 
 mara$speed <- ifelse(mara$CATEGORY == "A" | mara$CATEGORY == "B", "Fast", "Slow")
+
+
