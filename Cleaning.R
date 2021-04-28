@@ -7,13 +7,16 @@ library(ggplot2)
 library(pROC)
 library(RColorBrewer)
 
+# Read in the marathon data
 mara <- read.csv(file.choose(), header = T, stringsAsFactors = TRUE)
 View(mara)
 summary(mara)
 
+
+### CLEAN DATA ###
+
 # Creating our response variable
 mara$speed <- ifelse(mara$CATEGORY == "A" | mara$CATEGORY == "B", "Fast", "Slow")
 
-unique(mara$Category)
-
+# Make a binary cross training variable
 mara$CrossTraining_bin <- ifelse(mara$CrossTraining == "", "No", "Yes")
