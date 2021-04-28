@@ -7,7 +7,6 @@ library(ggplot2)
 library(pROC)
 library(RColorBrewer)
 
-# read in customer churn data
 mara <- read.csv(file.choose(), header = T, stringsAsFactors = TRUE)
 View(mara)
 summary(mara)
