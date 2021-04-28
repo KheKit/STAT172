@@ -16,3 +16,4 @@ mara$speed <- ifelse(mara$CATEGORY == "A" | mara$CATEGORY == "B", "Fast", "Slow"
 
 unique(mara$Category)
 
+mara$CrossTraining_bin <- ifelse(mara$CrossTraining == "", "No", "Yes")
