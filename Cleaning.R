@@ -15,3 +15,4 @@ summary(mara)
 mara$speed <- ifelse(mara$CATEGORY == "A" | mara$CATEGORY == "B", "Fast", "Slow")
 
 unique(mara$Category)
+
