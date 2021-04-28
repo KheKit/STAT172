@@ -18,6 +18,14 @@ summary(mara)
 # Creating our response variable
 mara$speed <- ifelse(mara$CATEGORY == "A" | mara$CATEGORY == "B", "Fast", "Slow")
 
+# Manually enter the missing Category values
+mara$Category[26] = "WAM"
+mara$Category[35] = "MAM"
+mara$Category[52] = "MAM"
+mara$Category[54] = "MAM"
+mara$Category[74] = "MAM"
+mara$Category[81] = "MAM"
+
 # Make a binary cross training variable
 mara$CrossTraining_bin <- ifelse(mara$CrossTraining == "", "No", "Yes")
 
