@@ -32,4 +32,9 @@ mara$CrossTraining_bin <- ifelse(mara$CrossTraining == "", "No", "Yes")
 # Fixing the piece of data in sp4week that had "11125.00000"
 mara$sp4week[82] <- 11.125
 
+# Making the "-" in Wall21 to be NA in order to get the average to eventually replace those
+mara$Wall21[mara$Wall21 == " -   "] <- NA
+mara$Wall21 <- as.numeric(as.character(mara$Wall21))
+avg_Wall <- mean(mara$Wall21, na.rm = TRUE)
+mara$Wall21[is.na(mara$Wall21)] <- avg_Wall
 
