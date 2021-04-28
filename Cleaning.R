@@ -23,3 +23,5 @@ mara$CrossTraining_bin <- ifelse(mara$CrossTraining == "", "No", "Yes")
 
 # Fixing the piece of data in sp4week that had "11125.00000"
 mara$sp4week[82] <- 11.125
+
+
