@@ -47,7 +47,7 @@ test.df = mara[-train.idx,]
 
 # fit our tree
 set.seed(741852)
-ctree <- rpart(speed ~ Category+km4week+sp4week+CrossTraining_bin+MarathonTime+Wall21,
+ctree <- rpart(speed ~ Category+km4week+sp4week+CrossTraining_bin+Wall21,
                data = train.df,
                method = "class")
 rpart.plot(ctree)
