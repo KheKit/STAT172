@@ -77,11 +77,11 @@ ggplot(data = mara) +
 
 ggplot(data = mara) + 
   geom_bar(aes(x = Category, fill = speed), position = "fill") +
-  labs(x = "Category", y = "Count")
+  labs(x = "Category", y = "Percentage")
 
 ggplot(data = mara) + 
   geom_bar(aes(x = CrossTraining_bin, fill = speed), position = "fill") +
-  labs(x = "Cross Training?", y = "Count")
+  labs(x = "Cross Training?", y = "Percentage")
 
 ggplot(data = mara) + 
   geom_histogram(aes(x = sp4week, fill = speed)) +
