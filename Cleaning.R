@@ -41,13 +41,13 @@ mara$Wall21[is.na(mara$Wall21)] <- avg_Wall
 # test tree
 RNGkind(sample.kind = "default")
 set.seed(741852)
-train.idx <- sample(x = 1:nrow(f), size = floor(.8*nrow(f)))
-train.df = f[train.idx,]
-test.df = f[-train.idx,]
+train.idx <- sample(x = 1:nrow(mara), size = floor(.8*nrow(mara)))
+train.df = mara[train.idx,]
+test.df = mara[-train.idx,]
 
 # fit our tree
 set.seed(741852)
-ctree <- rpart(fraud_reported ~ .,
-               data = train.df, # using train.df
-               method = "class") # classification tree (not regression tree)
+ctree <- rpart(speed ~ Category+km4week+sp4week+CrossTraining_bin+MarathonTime+Wall21,
+               data = train.df,
+               method = "class")
 rpart.plot(ctree)
