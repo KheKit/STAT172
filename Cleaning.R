@@ -38,3 +38,16 @@ mara$Wall21 <- as.numeric(as.character(mara$Wall21))
 avg_Wall <- mean(mara$Wall21, na.rm = TRUE)
 mara$Wall21[is.na(mara$Wall21)] <- avg_Wall
 
+# test tree
+RNGkind(sample.kind = "default")
+set.seed(741852)
+train.idx <- sample(x = 1:nrow(f), size = floor(.8*nrow(f)))
+train.df = f[train.idx,]
+test.df = f[-train.idx,]
+
+# fit our tree
+set.seed(741852)
+ctree <- rpart(fraud_reported ~ .,
+               data = train.df, # using train.df
+               method = "class") # classification tree (not regression tree)
+rpart.plot(ctree)
