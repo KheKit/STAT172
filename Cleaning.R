@@ -107,3 +107,65 @@ ctree <- rpart(speed ~ Category+km4week+sp4week+CrossTraining_bin+Wall21,
                data = train.df,
                method = "class")
 rpart.plot(ctree)
+
+
+
+## Forest
+
+mara$speed <- factor(mara$speed)
+mara$CrossTraining_bin <- factor(mara$CrossTraining_bin)
+
+# set seed
+RNGkind(sample.kind = "default")
+set.seed(741852)
+# training and testing
+train.idx <- sample(x = 1:nrow(mara), size = floor(.8*nrow(mara)))
+train.df = mara[train.idx,]
+test.df = mara[-train.idx,]
+
+
+# Tuning #
+mtry <- seq(1,4)
+# make room for OOB error, m value
+keeps <- data.frame(m = rep(NA, length(mtry)),
+                    OOB_err_rate = rep(NA, length(mtry)))
+
+for (idx in 1:length(mtry)) {
+  print(paste0("trying m = ", mtry[idx]))
+  forest <- randomForest(speed ~ Category + km4week + sp4week + CrossTraining_bin,
+                         data = train.df,
+                         ntree = 1000, 
+                         mtry = mtry[idx])
+  
+  keeps[idx, "m"] <- mtry[idx]
+  
+  keeps[idx, "OOB_err_rate"] <- mean(predict(forest) != train.df$speed)
+}
+
+ggplot(data = keeps) +
+  geom_line(aes(x = m, y = OOB_err_rate)) +
+  theme_bw() + labs(x = "m (mtry) value", y = "OOB error rate")
+
+
+#forest <- randomForest(speed ~ Category + km4week + sp4week + CrossTraining_bin,
+                      # data = train.df,
+                      # ntree = 1000, 
+                      # mtry = mtry[idx],
+                      # importance = TRUE)
+
+
+# Create an ROC curve ("Fast" is pos event)
+
+pi_hat_forest <- predict(finalforest, test.df, type = "prob")[,"Fast"]
+rocCurve <- roc(response = test.df$speed, 
+                predictor = pi_hat_forest,
+                levels = c("Slow", "Fast"))
+
+plot(rocCurve, print.auc = TRUE, print.thres = TRUE)
+# .106 (.874, .614)
+# AUC: .807
+
+varImpPlot(finalforest, type = 1)
+# primary.description, location.groups, ward seem to be most important ->
+#   use these in GLM
+
