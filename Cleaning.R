@@ -38,6 +38,58 @@ mara$Wall21 <- as.numeric(as.character(mara$Wall21))
 avg_Wall <- mean(mara$Wall21, na.rm = TRUE)
 mara$Wall21[is.na(mara$Wall21)] <- avg_Wall
 
+
+### EXPLORATORY #####
+# Univariate
+ggplot(data = mara) + 
+  geom_bar(aes(x = speed)) +
+  labs(x = "Speed", y = "Count")
+
+ggplot(data = mara) + 
+  geom_histogram(aes(x = Wall21)) +
+  labs(x = "Wall21", y = "Count")
+
+ggplot(data = mara) + 
+  geom_bar(aes(x = Category)) +
+  labs(x = "Category", y = "Count")
+
+ggplot(data = mara) + 
+  geom_bar(aes(x = CrossTraining_bin)) +
+  labs(x = "Cross Training?", y = "Count")
+
+ggplot(data = mara) + 
+  geom_histogram(aes(x = sp4week)) +
+  labs(x = "sp4Week", y = "Count")
+
+ggplot(data = mara) + 
+  geom_histogram(aes(x = km4week)) +
+  labs(x = "km4Week", y = "Count")
+
+
+# Add y - speed
+ggplot(data = mara) + 
+  geom_histogram(aes(x = Wall21, fill = speed)) +
+  labs(x = "Wall21", y = "Count")
+
+ggplot(data = mara) + 
+  geom_bar(aes(x = Category, fill = speed), position = "fill") +
+  labs(x = "Category", y = "Count")
+
+ggplot(data = mara) + 
+  geom_bar(aes(x = CrossTraining_bin, fill = speed), position = "fill") +
+  labs(x = "Cross Training?", y = "Count")
+
+ggplot(data = mara) + 
+  geom_histogram(aes(x = sp4week, fill = speed)) +
+  labs(x = "sp4Week", y = "Count")
+
+ggplot(data = mara) + 
+  geom_histogram(aes(x = km4week, fill = speed)) +
+  labs(x = "km4Week", y = "Count")
+
+
+
+#### ANALYSIS ######
 # test tree
 RNGkind(sample.kind = "default")
 set.seed(741852)
