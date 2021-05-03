@@ -41,9 +41,13 @@ mara$Wall21[is.na(mara$Wall21)] <- avg_Wall
 
 ### EXPLORATORY #####
 # Univariate
-ggplot(data = mara) + 
-  geom_bar(aes(x = speed)) +
-  labs(x = "Speed", y = "Count")
+ggplot(data = mara,aes(x = speed)) + 
+  geom_bar(fill = "steelblue") +
+  ggtitle("Speed") +
+  geom_text(stat="count", aes(label=..count..), vjust=1.6, color="white", size=3.5) +
+  labs(x = "Speed", y = "Frequency") +
+  theme_bw()
+  
 
 ggplot(data = mara) + 
   geom_histogram(aes(x = Wall21)) +
