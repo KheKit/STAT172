@@ -158,11 +158,11 @@ ggplot(data = keeps) +
   theme_bw() + labs(x = "m (mtry) value", y = "OOB error rate")
 
 
-#forest <- randomForest(speed ~ Category + km4week + sp4week + CrossTraining_bin,
-                      # data = train.df,
-                      # ntree = 1000, 
-                      # mtry = mtry[idx],
-                      # importance = TRUE)
+finalforest <- randomForest(speed ~ Category + km4week + sp4week + CrossTraining_bin,
+                       data = train.df,
+                       ntree = 1000, 
+                       mtry = 1,
+                       importance = TRUE)
 
 
 # Create an ROC curve ("Fast" is pos event)
@@ -173,12 +173,11 @@ rocCurve <- roc(response = test.df$speed,
                 levels = c("Slow", "Fast"))
 
 plot(rocCurve, print.auc = TRUE, print.thres = TRUE)
-# .106 (.874, .614)
-# AUC: .807
+# .758 (1, .857)
+# AUC: .935
 
 varImpPlot(finalforest, type = 1)
-# primary.description, location.groups, ward seem to be most important ->
-#   use these in GLM
+# sp4week, then km4week, then Category, then CrossTraining_bin
 
 #################################### 
 
