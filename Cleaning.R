@@ -143,7 +143,7 @@ keeps <- data.frame(m = rep(NA, length(mtry)),
 
 for (idx in 1:length(mtry)) {
   print(paste0("trying m = ", mtry[idx]))
-  forest <- randomForest(speed ~ Category + km4week + sp4week + CrossTraining_bin,
+  forest <- randomForest(speed ~ Category + km4week + sp4week + CrossTraining_bin + halfratio,
                          data = train.df,
                          ntree = 1000, 
                          mtry = mtry[idx])
@@ -158,7 +158,7 @@ ggplot(data = keeps) +
   theme_bw() + labs(x = "m (mtry) value", y = "OOB error rate")
 
 
-finalforest <- randomForest(speed ~ Category + km4week + sp4week + CrossTraining_bin,
+finalforest <- randomForest(speed ~ Category + km4week + sp4week + CrossTraining_bin + halfratio,
                        data = train.df,
                        ntree = 1000, 
                        mtry = 1,
