@@ -169,3 +169,20 @@ varImpPlot(finalforest, type = 1)
 # primary.description, location.groups, ward seem to be most important ->
 #   use these in GLM
 
+#################################### 
+
+m1 <- glm(data = mara, factor(speed) ~ km4week + sp4week + Category + CrossTraining_bin, family = "binomial")
+summary(m1)
+#GLM with all possible explanatory variables. AIC = 84.705
+
+m2 <- glm(data = mara, factor(speed) ~ km4week + sp4week + Category, family = "binomial")
+summary(m2)
+#GLM without CrossTrain_bin. Took out due to high p-value of 0.273512. AIC = 83.916
+
+m3 <- glm(data = mara, factor(speed) ~ km4week + sp4week, family = "binomial")
+summary(m3)
+#GLM without CrossTrain_bin and Category. Took category out due to high p-values across all cateogories. AIC = 78.197
+
+
+
+
