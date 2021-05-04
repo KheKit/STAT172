@@ -38,6 +38,17 @@ mara$Wall21 <- as.numeric(as.character(mara$Wall21))
 avg_Wall <- mean(mara$Wall21, na.rm = TRUE)
 mara$Wall21[is.na(mara$Wall21)] <- avg_Wall
 
+# Create new variable of ratio of first half marathon to second half marathon
+mara$halfratio <- mara$Wall21 / ( mara$MarathonTime - mara$Wall21)
+
+# Remove unused variables
+mara$id <- NULL
+mara$Marathon <- NULL
+mara$Name <- NULL
+mara$CATEGORY <- NULL
+mara$CrossTraining <- NULL
+mara$MarathonTime <- NULL
+mara$Wall21 <- NULL
 
 ### EXPLORATORY #####
 # Univariate
@@ -50,8 +61,8 @@ ggplot(data = mara,aes(x = speed)) +
   
 
 ggplot(data = mara) + 
-  geom_histogram(aes(x = Wall21)) +
-  labs(x = "Wall21", y = "Count")
+  geom_histogram(aes(x = halfratio)) +
+  labs(x = "halfratio", y = "Count")
 
 ggplot(data = mara) + 
   geom_bar(aes(x = Category)) +
@@ -72,8 +83,8 @@ ggplot(data = mara) +
 
 # Add y - speed
 ggplot(data = mara) + 
-  geom_histogram(aes(x = Wall21, fill = speed)) +
-  labs(x = "Wall21", y = "Count")
+  geom_histogram(aes(x = halfratio, fill = speed)) +
+  labs(x = "halfratio", y = "Count")
 
 ggplot(data = mara) + 
   geom_bar(aes(x = Category, fill = speed), position = "fill") +
@@ -103,7 +114,7 @@ test.df = mara[-train.idx,]
 
 # fit our tree
 set.seed(741852)
-ctree <- rpart(speed ~ Category+km4week+sp4week+CrossTraining_bin+Wall21,
+ctree <- rpart(speed ~ Category+km4week+sp4week+CrossTraining_bin+halfratio,
                data = train.df,
                method = "class")
 rpart.plot(ctree)
