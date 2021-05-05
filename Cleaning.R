@@ -99,14 +99,14 @@ ggplot(data = mara, aes(x = km4week)) +
 # Add y - speed
 ggplot(data = mara) + 
   geom_histogram(aes(x = halfratio, fill = speed)) +
-  ggtitle("Half Ration With Speed") +
+  ggtitle("Half Ratio With Speed") +
   labs(x = "halfratio", y = "Count") +
   theme_minimal()
 
 # using proportion 
 ggplot(data = mara) + 
   geom_histogram(aes(x = halfratio, fill = speed), position = "fill") +
-  ggtitle(" Proportion Half Ration With Speed") +
+  ggtitle("Proportion of Half Ratio With Speed") +
   labs(x = "halfratio", y = "Count") +
   scale_fill_brewer("Speed", palette = "Dark2") +
   theme_minimal()
@@ -150,7 +150,7 @@ ggplot(data = mara) +
 ggplot(data = mara) +
   geom_point(aes(x = km4week, y = MarathonTime, col = Category)) +
   geom_smooth(aes(x = km4week, y = MarathonTime)) +
-  ggtitle("km4Week Vs MarathonTime") +
+  ggtitle("km4Week Vs Marathon Time") +
   labs(x = "km4Week", y = "Marathon Time") +
   scale_color_brewer("Category", palette = "Dark2") +
   theme_bw()
@@ -234,8 +234,8 @@ rocCurve <- roc(response = test.df$speed,
                 levels = c("Slow", "Fast"))
 
 plot(rocCurve, print.auc = TRUE, print.thres = TRUE)
-# .758 (1, .857)
-# AUC: .935
+# .871 (1, .571)
+# AUC: .818
 
 varImpPlot(finalforest, type = 1)
 # sp4week, then km4week, then Category, then CrossTraining_bin
@@ -245,17 +245,19 @@ varImpPlot(finalforest, type = 1)
 ### Using Binomial ########################################
 ################################################
 
-m1 <- glm(data = mara, factor(speed) ~ km4week + sp4week + Category + CrossTraining_bin, family = "binomial")
+m1 <- glm(data = mara, factor(speed) ~ km4week + sp4week + halfratio + Category + CrossTraining_bin, family = "binomial")
 summary(m1)
-#GLM with all possible explanatory variables. AIC = 84.705
+#GLM with all possible explanatory variables. AIC = 86.493
 
-m2 <- glm(data = mara, factor(speed) ~ km4week + sp4week + Category, family = "binomial")
+m2 <- glm(data = mara, factor(speed) ~ km4week + sp4week + halfratio + Category, family = "binomial")
 summary(m2)
-#GLM without CrossTrain_bin. Took out due to high p-value of 0.273512. AIC = 83.916
+#GLM without CrossTrain_bin. Took out due to high p-value of 0.325194 (and it's last on the 
+#   variable importance plot. AIC = 85.472
 
-m3 <- glm(data = mara, factor(speed) ~ km4week + sp4week, family = "binomial")
+m3 <- glm(data = mara, factor(speed) ~ km4week + sp4week + halfratio, family = "binomial")
 summary(m3)
-#GLM without CrossTrain_bin and Category. Took category out due to high p-values across all cateogories. AIC = 78.197
+#GLM without CrossTrain_bin and Category. Took category out due to high p-values across all categories. AIC = 79.112.
+#   Lowest AIC!  Makes sense because it's the top 3 in the variable importance plot.
 
 
 
