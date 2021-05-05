@@ -248,7 +248,7 @@ varImpPlot(finalforest, type = 1)
 
 #################################################################################
 ### Modeling ########################################################
-### Using Binomial ########################################
+### Using Binomial (Bernoulli) ########################################
 ################################################
 
 m1 <- glm(data = mara, factor(speed) ~ km4week + sp4week + halfratio + Category + CrossTraining_bin, family = "binomial")
