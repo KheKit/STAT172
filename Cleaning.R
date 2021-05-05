@@ -79,7 +79,7 @@ ggplot(data = mara, aes(x = Category)) +
 
 ggplot(data = mara, aes(x = CrossTraining_bin)) + 
   geom_bar(fill = "steelblue") +
-  ggtitle("Number of Crossing Traning") +
+  ggtitle("Number of Cross Traning") +
   geom_text(stat="count", aes(label=..count..), vjust=1.6, color="white", size=5) +
   labs(x = "Cross Training", y = "Count") +
   theme_bw()
@@ -120,7 +120,7 @@ ggplot(data = mara) +
 
 ggplot(data = mara) + 
   geom_bar(aes(x = CrossTraining_bin, fill = speed), position = "fill") +
-  ggtitle("Proportion of Crossing Training With Speed") +
+  ggtitle("Proportion of Cross Training With Speed") +
   labs(x = "Cross Training", y = "Percentage") +
   scale_fill_brewer("Speed", palette = "Dark2") +
   theme_minimal()
