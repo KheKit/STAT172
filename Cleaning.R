@@ -237,6 +237,12 @@ plot(rocCurve, print.auc = TRUE, print.thres = TRUE)
 # .871 (1, .571)
 # AUC: .818
 
+# If we set our threshold at .871, 
+# When a runner is not fast, we are going to correctly predict that they are not 
+#   fast 100% of the time.  NOTE: This is because we have such a small data set!!!
+# When a runner is fast, we are going to correctly identify that about 
+#   57% of the time
+
 varImpPlot(finalforest, type = 1)
 # sp4week, then km4week, then Category, then CrossTraining_bin
 
