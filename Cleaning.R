@@ -265,6 +265,6 @@ summary(m3)
 #GLM without CrossTrain_bin and Category. Took category out due to high p-values across all categories. AIC = 79.112.
 #   Lowest AIC!  Makes sense because it's the top 3 in the variable importance plot.
 
-
+# halfratio has a large standard error...
 
 
