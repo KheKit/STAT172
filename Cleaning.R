@@ -50,6 +50,8 @@ mara$CATEGORY <- NULL
 mara$CrossTraining <- NULL
 mara$Wall21 <- NULL
 
+write.csv(mara, "/Users/smoon/Desktop/track.csv")
+
 ##################################################################################
 ### EXPLORATORY ############################################################
 #### Visualization ###################################################
@@ -266,5 +268,11 @@ summary(m3)
 #   Lowest AIC!  Makes sense because it's the top 3 in the variable importance plot.
 
 # halfratio has a large standard error...
+
+m4 <- glm(data = mara, factor(speed) ~ km4week + sp4week, family = "binomial")
+summary(m4)
+# Took out halfratio because it has a large standard error (complete separation), and
+#   it doesn't quite make sense to include it since it is something that occurrs after
+#   the race has started.  AIC: 78.197 - Smallest AIC - use for interpretations!!
 
 
