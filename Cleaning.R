@@ -12,8 +12,9 @@ mara <- read.csv(file.choose(), header = T, stringsAsFactors = TRUE)
 View(mara)
 summary(mara)
 
-
-### CLEAN DATA ###
+####################################################################################
+### CLEAN DATA #################################################
+#######################################################
 
 # Creating our response variable
 mara$speed <- ifelse(mara$CATEGORY == "A" | mara$CATEGORY == "B", "Fast", "Slow")
@@ -47,65 +48,118 @@ mara$Marathon <- NULL
 mara$Name <- NULL
 mara$CATEGORY <- NULL
 mara$CrossTraining <- NULL
-mara$MarathonTime <- NULL
 mara$Wall21 <- NULL
 
-### EXPLORATORY #####
+##################################################################################
+### EXPLORATORY ############################################################
+#### Visualization ###################################################
+############################################################
+
 # Univariate
 ggplot(data = mara,aes(x = speed)) + 
   geom_bar(fill = "steelblue") +
   ggtitle("Speed") +
-  geom_text(stat="count", aes(label=..count..), vjust=1.6, color="white", size=3.5) +
+  geom_text(stat="count", aes(label=..count..), vjust=1.6, color="white", size=5) +
   labs(x = "Speed", y = "Frequency") +
+  theme_bw()
+
+ggplot(data = mara, aes(x = halfratio)) + 
+  geom_histogram(fill = "steelblue") +
+  ggtitle("Histogram of Half Ratio") +
+  labs(x = "halfratio", y = "Count") +
+  theme_bw()
+
+ggplot(data = mara, aes(x = Category)) + 
+  geom_bar(fill = "steelblue") +
+  ggtitle("Age Category") +
+  geom_text(stat="count", aes(label=..count..), vjust=1.4, color="white", size=4) +
+  labs(x = "Category", y = "Frequency") +
   theme_bw()
   
 
-ggplot(data = mara) + 
-  geom_histogram(aes(x = halfratio)) +
-  labs(x = "halfratio", y = "Count")
+ggplot(data = mara, aes(x = CrossTraining_bin)) + 
+  geom_bar(fill = "steelblue") +
+  ggtitle("Number of Crossing Traning") +
+  geom_text(stat="count", aes(label=..count..), vjust=1.6, color="white", size=5) +
+  labs(x = "Cross Training", y = "Count") +
+  theme_bw()
 
-ggplot(data = mara) + 
-  geom_bar(aes(x = Category)) +
-  labs(x = "Category", y = "Count")
+ggplot(data = mara, aes(x = sp4week)) + 
+  geom_histogram(fill = "steelblue") +
+  ggtitle("Histogram of sp4Week") +
+  labs(x = "sp4Week", y = "Count") +
+  theme_bw()
 
-ggplot(data = mara) + 
-  geom_bar(aes(x = CrossTraining_bin)) +
-  labs(x = "Cross Training?", y = "Count")
-
-ggplot(data = mara) + 
-  geom_histogram(aes(x = sp4week)) +
-  labs(x = "sp4Week", y = "Count")
-
-ggplot(data = mara) + 
-  geom_histogram(aes(x = km4week)) +
-  labs(x = "km4Week", y = "Count")
-
+ggplot(data = mara, aes(x = km4week)) + 
+  geom_histogram(fill = "steelblue") +
+  ggtitle("Histogram of km4Week") +
+  labs(x = "km4Week", y = "Count") +
+  theme_bw()
 
 # Add y - speed
 ggplot(data = mara) + 
   geom_histogram(aes(x = halfratio, fill = speed)) +
-  labs(x = "halfratio", y = "Count")
+  ggtitle("Half Ration With Speed") +
+  labs(x = "halfratio", y = "Count") +
+  theme_minimal()
 
+# using proportion 
+ggplot(data = mara) + 
+  geom_histogram(aes(x = halfratio, fill = speed), position = "fill") +
+  ggtitle(" Proportion Half Ration With Speed") +
+  labs(x = "halfratio", y = "Count") +
+  scale_fill_brewer("Speed", palette = "Dark2") +
+  theme_minimal()
+  
 ggplot(data = mara) + 
   geom_bar(aes(x = Category, fill = speed), position = "fill") +
-  labs(x = "Category", y = "Percentage")
+  ggtitle("Proportion of Category With Speed") +
+  labs(x = "Category", y = "Percentage") +
+  scale_fill_brewer("Speed", palette = "Dark2") +
+  theme_minimal()
 
 ggplot(data = mara) + 
   geom_bar(aes(x = CrossTraining_bin, fill = speed), position = "fill") +
-  labs(x = "Cross Training?", y = "Percentage")
+  ggtitle("Proportion of Crossing Training With Speed") +
+  labs(x = "Cross Training", y = "Percentage") +
+  scale_fill_brewer("Speed", palette = "Dark2") +
+  theme_minimal()
 
 ggplot(data = mara) + 
   geom_histogram(aes(x = sp4week, fill = speed)) +
-  labs(x = "sp4Week", y = "Count")
+  ggtitle("Histogram of sp4Week With Speed") +
+  labs(x = "sp4Week", y = "Count") +
+  scale_fill_brewer("Speed", palette = "Dark2") +
+  theme_minimal()
 
 ggplot(data = mara) + 
   geom_histogram(aes(x = km4week, fill = speed)) +
-  labs(x = "km4Week", y = "Count")
+  ggtitle("Histogram of km4Week With Speed") +
+  labs(x = "km4Week", y = "Count") +
+  scale_fill_brewer("Speed", palette = "Dark2") +
+  theme_minimal()
 
+# Scatter plot
+ggplot(data = mara) +
+  geom_point(aes(x = sp4week, y = km4week, col = Category)) +
+  ggtitle("sp4Week Vs km4Week") +
+  labs(x = "Sp4Week", y = "Km4Week") +
+  scale_color_brewer("Category", palette = "Dark2") +
+  theme_bw()
 
+ggplot(data = mara) +
+  geom_point(aes(x = km4week, y = MarathonTime, col = Category)) +
+  geom_smooth(aes(x = km4week, y = MarathonTime)) +
+  ggtitle("km4Week Vs MarathonTime") +
+  labs(x = "km4Week", y = "Marathon Time") +
+  scale_color_brewer("Category", palette = "Dark2") +
+  theme_bw()
 
-#### ANALYSIS ######
-# test tree
+#######################################################################
+#### ANALYSIS ###############################################
+# test tree ###################################
+#######################################
+
 RNGkind(sample.kind = "default")
 set.seed(741852)
 train.idx <- sample(x = 1:nrow(mara), size = floor(.8*nrow(mara)))
@@ -120,8 +174,9 @@ ctree <- rpart(speed ~ Category+km4week+sp4week+CrossTraining_bin+halfratio,
 rpart.plot(ctree)
 
 
-
-## Forest
+############################################################################
+## Random Forest ###############################################
+###################################################
 
 mara$speed <- factor(mara$speed)
 mara$CrossTraining_bin <- factor(mara$CrossTraining_bin)
@@ -135,8 +190,14 @@ train.df = mara[train.idx,]
 test.df = mara[-train.idx,]
 
 
+# temporary forest
+tempforest <- randomForest(speed ~ Category + km4week + sp4week + CrossTraining_bin + halfratio,
+                           data = train.df,
+                           ntree = 1000,
+                           mtry = 4)
+
 # Tuning #
-mtry <- seq(1,4)
+mtry <- seq(1,5)
 # make room for OOB error, m value
 keeps <- data.frame(m = rep(NA, length(mtry)),
                     OOB_err_rate = rep(NA, length(mtry)))
@@ -153,15 +214,15 @@ for (idx in 1:length(mtry)) {
   keeps[idx, "OOB_err_rate"] <- mean(predict(forest) != train.df$speed)
 }
 
-ggplot(data = keeps) +
-  geom_line(aes(x = m, y = OOB_err_rate)) +
-  theme_bw() + labs(x = "m (mtry) value", y = "OOB error rate")
-
+# Plot OOB error rate ~ m (mtry) value
+qplot(m, OOB_err_rate, geom = c("line", "point"), data = keeps) +
+  theme_bw() + labs(x = "m (mtry) value", y = "OOB error rate") +
+  scale_x_continuous(breaks = c(1:10))
 
 finalforest <- randomForest(speed ~ Category + km4week + sp4week + CrossTraining_bin + halfratio,
                        data = train.df,
                        ntree = 1000, 
-                       mtry = 1,
+                       mtry = 5,
                        importance = TRUE)
 
 
@@ -179,7 +240,10 @@ plot(rocCurve, print.auc = TRUE, print.thres = TRUE)
 varImpPlot(finalforest, type = 1)
 # sp4week, then km4week, then Category, then CrossTraining_bin
 
-#################################### 
+#################################################################################
+### Modeling ########################################################
+### Using Binomial ########################################
+################################################
 
 m1 <- glm(data = mara, factor(speed) ~ km4week + sp4week + Category + CrossTraining_bin, family = "binomial")
 summary(m1)
