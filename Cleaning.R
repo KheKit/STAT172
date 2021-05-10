@@ -280,5 +280,34 @@ summary(m4)
 #   the race has started.  AIC: 78.197 - Smallest AIC - use for interpretations!!
 
 exp(confint(m4))
+# This gives us the confidence intervals
 
+
+
+# Hyothesis tests:
 anova(m4, test = "Chisq")
+# H0: B1 = 0 (meaning that km4week is significant)
+# HA: B1 != 0 (meaning that km4week is not significant)
+# Test statistic: 23.619
+# df = 1
+# Null distribution is Chi-squared with 1 df
+# p-value = 0.000001174 which is basically zero.
+# Conclusion: Since the p-value is less than 0.05, we reject the null hyothesis and conclude
+# that the kilometers trained per week is signicant in predicting the odds of a runner being fast.
+
+# H0: B2 = 0 (meaning that sp4week is significant)
+# HA: B2 != 0 (meaning that sp4week is not significant)
+# Test statistic: 23.398
+# df = 1
+# Null distribution is Chi-squared with 1 df
+# p-value = 0.000001317 which is basically zero.
+# Conclusion: Since the p-value is less than 0.05, we reject the null hyothesis and conclude
+# that the the speed trained at on average is signicant in predicting the odds of a runner being fast.
+
+
+
+
+
+
+
+
