@@ -280,3 +280,5 @@ summary(m4)
 #   the race has started.  AIC: 78.197 - Smallest AIC - use for interpretations!!
 
 exp(confint(m4))
+
+anova(m4, test = "Chisq")
