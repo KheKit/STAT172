@@ -253,23 +253,27 @@ varImpPlot(finalforest, type = 1)
 ### Using Binomial (Bernoulli) ########################################
 ################################################
 
-m1 <- glm(data = mara, factor(speed) ~ km4week + sp4week + halfratio + Category + CrossTraining_bin, family = "binomial")
+# Make a binary speed variable
+mara$speed_bin <- ifelse(mara$speed == "Fast", 1, 0)
+
+
+m1 <- glm(data = mara, speed_bin ~ km4week + sp4week + halfratio + Category + CrossTraining_bin, family = "binomial")
 summary(m1)
 #GLM with all possible explanatory variables. AIC = 86.493
 
-m2 <- glm(data = mara, factor(speed) ~ km4week + sp4week + halfratio + Category, family = "binomial")
+m2 <- glm(data = mara, speed_bin ~ km4week + sp4week + halfratio + Category, family = "binomial")
 summary(m2)
 #GLM without CrossTrain_bin. Took out due to high p-value of 0.325194 (and it's last on the 
 #   variable importance plot. AIC = 85.472
 
-m3 <- glm(data = mara, factor(speed) ~ km4week + sp4week + halfratio, family = "binomial")
+m3 <- glm(data = mara, speed_bin ~ km4week + sp4week + halfratio, family = "binomial")
 summary(m3)
 #GLM without CrossTrain_bin and Category. Took category out due to high p-values across all categories. AIC = 79.112.
 #   Lowest AIC!  Makes sense because it's the top 3 in the variable importance plot.
 
 # halfratio has a large standard error...
 
-m4 <- glm(data = mara, factor(speed) ~ km4week + sp4week, family = "binomial")
+m4 <- glm(data = mara, speed_bin ~ km4week + sp4week, family = "binomial")
 summary(m4)
 # Took out halfratio because it has a large standard error (complete separation), and
 #   it doesn't quite make sense to include it since it is something that occurrs after
