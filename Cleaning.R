@@ -286,8 +286,8 @@ exp(confint(m4))
 
 # Hyothesis tests:
 anova(m4, test = "Chisq")
-# H0: B1 = 0 (meaning that km4week is significant)
-# HA: B1 != 0 (meaning that km4week is not significant)
+# H0: B1 = 0 (meaning that km4week is not significant)
+# HA: B1 != 0 (meaning that km4week is significant)
 # Test statistic: 23.619
 # df = 1
 # Null distribution is Chi-squared with 1 df
@@ -295,8 +295,8 @@ anova(m4, test = "Chisq")
 # Conclusion: Since the p-value is less than 0.05, we reject the null hyothesis and conclude
 # that the kilometers trained per week is signicant in predicting the odds of a runner being fast.
 
-# H0: B2 = 0 (meaning that sp4week is significant)
-# HA: B2 != 0 (meaning that sp4week is not significant)
+# H0: B2 = 0 (meaning that sp4week is not significant)
+# HA: B2 != 0 (meaning that sp4week is significant)
 # Test statistic: 23.398
 # df = 1
 # Null distribution is Chi-squared with 1 df
