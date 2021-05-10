@@ -279,4 +279,4 @@ summary(m4)
 #   it doesn't quite make sense to include it since it is something that occurrs after
 #   the race has started.  AIC: 78.197 - Smallest AIC - use for interpretations!!
 
-
+exp(confint(m4))
